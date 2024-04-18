@@ -1,4 +1,5 @@
 from django.contrib import admin
+from .foto_inline import FotoInline
 
 from ..models import Animal
 
@@ -34,3 +35,5 @@ class AnimalAdmin(admin.ModelAdmin):
         'updated_at',
         'user',   
     ]
+
+    inlines = [FotoInline]
