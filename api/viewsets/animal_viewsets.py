@@ -8,7 +8,7 @@ from ..serializers import AnimalSerializer
 class AnimalViewSet(viewsets.ModelViewSet):
     queryset = Animal.objects.all()
     serializer_class = AnimalSerializer
-    permission_classes = [IsAuthenticated]
+   
 
     filter_backends = [filters.SearchFilter]
 

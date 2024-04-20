@@ -8,7 +8,7 @@ from ..serializers import InteresseSerializer
 class InteresseViewSet(viewsets.ModelViewSet):
     queryset = Interesse.objects.all()
     serializer_class = InteresseSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     filter_backends = [filters.SearchFilter]
 
