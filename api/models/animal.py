@@ -4,7 +4,7 @@ from django.db import models
 class Animal(models.Model):
     especie = models.CharField(max_length=100)
     raca = models.CharField(max_length=100)
-    idade = models.IntegerField()
+    idade = models.CharField(max_length=100)
     tamanho = models.CharField(max_length=100)
     sexo = models.CharField(max_length=100)
     descricao = models.TextField()
