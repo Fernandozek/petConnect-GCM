@@ -17,4 +17,50 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.nome
+    
+    def clean_cnpj(cnpj):
+        cnpj = only_digits(cnpj)
+        
+        if len(cnpj) != 14:
+            return False
+        
+        if cnpj == '00000000000000' or cnpj == '11111111111111' or cnpj == '22222222222222' or cnpj == '33333333333333' or cnpj == '44444444444444' or cnpj == '55555555555555' or cnpj == '66666666666666' or cnpj == '77777777777777' or cnpj == '88888888888888' or cnpj == '99999999999999':
+            return False
+        
+        tamanho = len(cnpj) - 2
+        numeros = cnpj[:tamanho]
+        digitos = cnpj[tamanho:]
+        soma = 0
+        pos = tamanho - 7
+        
+        for i in range(tamanho):
+            soma += int(numeros[i]) * pos
+            pos -= 1
+            if pos < 2:
+                pos = tamanho - 1
+        
+        resultado = (soma * 10) % 11
+        digito = 0 if resultado == 10 else resultado
+        
+        if digito != int(digitos[0]):
+            return False
+        
+        tamanho += 1
+        numeros = cnpj[:tamanho]
+        soma = 0
+        pos = tamanho - 7
+        
+        for i in range(tamanho):
+            soma += int(numeros[i]) * pos
+            pos -= 1
+            if pos < 2:
+                pos = tamanho - 1
+        
+        resultado = (soma * 10) % 11
+        digito = 0 if resultado == 10 else resultado
+        
+        if digito != int(digitos[1]):
+            return False
+        
+        return True
 
