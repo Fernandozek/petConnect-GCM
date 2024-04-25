@@ -41,7 +41,7 @@ function Home() {
   const [institution, setInstitution] = useState(false);
   const [enableForm, setEnableForm] = useState(false);
   const [data, setData] = useState<AnimalProps>(emptyData);
-  const [posts, setPosts] = useState<Array<any>>([]);
+  const [posts, setPosts] = useState<any>([]);
   const navigate = useNavigate();
 
   function addFile(event: any) {
@@ -187,6 +187,9 @@ function Home() {
   }
 
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
     if (typeUser === "1") {
       const req = async () => {
         await getPosts();
@@ -205,8 +208,8 @@ function Home() {
     <PageTemplate>
       {(typeUser === "1" && (
         <div className="w-full flex justify-center pt-10 bg-background">
-          <section className={`w-[60%] flex flex-col pt-10 px-10 ${posts.length ? 'bg-gray-200' : ''}`}>
-            {posts.length > 0 && posts.map((animal: any, index: number) => {
+          <section className={`w-[60%] flex flex-col pt-10 px-10 ${posts ? 'bg-gray-200' : ''}`}>
+            {posts > 0 && posts.map((animal: any, index: number) => {
               return (
                 <div
                   key={index}
